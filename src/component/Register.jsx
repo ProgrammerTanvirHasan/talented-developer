@@ -9,7 +9,7 @@ const Register = () => {
   const [passError, setPassError] = useState('');
  
 
-  const { createUser,user,setUser} = useContext(AuthContext);
+  const { createUser,setUser} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
@@ -40,24 +40,27 @@ const Register = () => {
     createUser(email, password)
       .then(result => {
         const user = result.user;
-
-       updateProfile(auth.currentUser,{
-           displayName:name,photoURL:photoURL,
-       }).then(result=>{
-        
-        setUser(result.user)
-       }).catch(error=>{
-        console.log(error.message);
-       })
-
+             
+       updateProfile(user, {
+        displayName: name,
+        photoURL: photoURL,
+      })
+       
+       .then(()=>{
         setUser(user);
+      console.log(user);
         Swal.fire({
           title: 'Success',
           text: 'User Created Successfully',
           icon: 'success',
           confirmButtonText: 'Cool'
-        });
-      
+        });   
+       })
+       
+       .catch(error => {
+        console.log(error.message);
+      });
+         
 
         form.reset();
         navigate('/login');

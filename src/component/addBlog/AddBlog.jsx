@@ -1,19 +1,30 @@
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider";
+import Swal from "sweetalert2";
+
+
 
 
 const AddBlog = () => {
 
-
+  const {user}=useContext(AuthContext)
+ 
 
 
 const handleBlog=(e)=>{
+
   e.preventDefault()
   const form= e.target;
   const title=form.title.value;
   const image=form.image.value;
   const bio=form.bio.value;
   const category=form.category.value;
-  const blog={title,image,bio,category}
+  const email=form.email.value;
+  const time=form.time.value;
+  const blog={title,image,bio,category,email,time}
   console.log(blog);
+  
+ 
 
 
   fetch('http://localhost:5000/developers',{
@@ -25,7 +36,13 @@ const handleBlog=(e)=>{
   })
   .then(res=>res.json())
   .then(data=>{
-    console.log(data);
+          
+       Swal.fire({
+        title: 'Done!',
+        text: 'Blog added successfully',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      })
   })
 
 
@@ -52,13 +69,30 @@ const handleBlog=(e)=>{
     </div>
     <div className=" bg-slate-500 w-full max-w-sm  border shadow-2xl">
       <form onSubmit={handleBlog} className="card-body">
-        <div className="form-control">
-        <label className="form-control w-full max-w-xs ">
+
+   
+   
+      <label className="form-control  ">
+      <input type="text"  name="time"  className="text-orange-500 bg-slate-600 px-2 text-center" defaultValue={user?.metadata.creationTime || 'N/A'} />
+        </label>
+         
+
+            <div className="form-control">
+        
+                <label className="form-control ">
+      <input type="email"  name="email" className="text-orange-500 bg-slate-600 px-2 text-center"  defaultValue={user?.email || 'No email found'} />
+        </label>
+     
+   
+   
+         <label className="form-control w-full max-w-xs ">
   <div className="label">
     <span className="label-text text-xl font-semibold text-orange-200 ">Blog title</span>
      </div>
   <input type="text" placeholder="Blog Name" name="title" className="input input-bordered input-primary w-full max-w-xs" />
    </label>
+   
+
         <label className="form-control w-full max-w-xs ">
   <div className="label">
     <span className="label-text text-xl font-semibold text-orange-200 ">ImageURL</span>
@@ -84,12 +118,12 @@ const handleBlog=(e)=>{
     <span className="label-text text-xl font-semibold text-orange-200 ">Category: </span>
      </div> 
        <select name="category" className="select w-full  ">
-  <option disabled selected>Select any</option>
+  <option disabled selected>Development</option>
   <option>Programming</option>
   <option>Cloud</option>
   <option>Design</option>
   <option>Marketing</option>
-  <option>Development</option>
+ 
 </select>
  </div>
  <div className="text-center mt-4">
@@ -111,3 +145,12 @@ const handleBlog=(e)=>{
 };
 
 export default AddBlog;
+
+
+
+
+
+
+
+
+

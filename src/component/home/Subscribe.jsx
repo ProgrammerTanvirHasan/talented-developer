@@ -1,14 +1,37 @@
 
+import { useContext } from "react";
 import { FaBell} from "react-icons/fa";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider";
+import Marquee from "react-fast-marquee";
+
+
 const Subscribe = () => {
-
-
-
+  const{user}=useContext(AuthContext)
     const handleSubmit=(e)=>{
+
+      
         e.preventDefault()
         const form=e.target;
        const email=form.email.value;
+
+
+        fetch('http://localhost:5000/developers',{
+          method:"POST",
+          headers:{
+            "content-type":"application/json"
+          },
+          body:JSON.stringify({email})
+        })
+       .then(res=>res.json())
+        .then(data=>console.log(data,'dfd'))
+
+
+
+
+
+
+
        Swal.fire({
         title: 'Done!',
         text: 'Thanks For Subscribing',
@@ -47,6 +70,9 @@ const Subscribe = () => {
        
       </div>
      <div>
+     <Marquee speed={80}>
+      <p className="text-orange-950 ml-4">Subscribe Our Newsletter</p>
+      </Marquee>
       <p className="text-3xl text-center text-orange-950">Subscribe Now!</p>
      </div>
      <p className="p-2 text-white">Subscribe today to stay inspired, informed, and ahead of the curve.</p>
@@ -56,7 +82,7 @@ const Subscribe = () => {
           <label className="label">
             <span className="label-text">Email</span>
           </label>
-          <input type="email" placeholder="email" name="email" className="input input-bordered" required />
+          <input type="email" placeholder="email" name="email" defaultValue={user?.email || ''} className="input input-bordered" required />
         </div>
         
         <div className="form-control mt-6">
