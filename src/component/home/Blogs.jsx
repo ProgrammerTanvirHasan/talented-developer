@@ -55,7 +55,7 @@ const Blogs = ({blog}) => {
  
     return (
         <div>
-            <div className="card bg-gradient-to-b from-zinc-600 to-slate-500 w-96 h-96 border">
+            <div className="card bg-gradient-to-b from-zinc-600 to-slate-500 w-96  border">
   <figure>
     <img
       src={image}
@@ -66,11 +66,12 @@ const Blogs = ({blog}) => {
     <p className="text-white font-semibold text-lg
     ">Category:{category}</p>
         <p className="text-white">{email}</p>
-    <div className="text-center">
-    <button className="btn glass bg-slate-950 text-black">Details</button>
+        <div className="text-center">
+    <button className="btn glass bg-slate-950 text-black ">Details</button>
     <button onClick={()=>handleWishlist(blog)} className="btn glass bg-slate-700 text-black">WishList</button>
   </div>
-  </div>
+     </div>
+  
 </div>
         </div>
     );

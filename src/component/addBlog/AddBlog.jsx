@@ -118,11 +118,12 @@ const handleBlog=(e)=>{
     <span className="label-text text-xl font-semibold text-orange-200 ">Category: </span>
      </div> 
        <select name="category" className="select w-full  ">
-  <option disabled selected>Development</option>
+  <option disabled selected>Technology</option>
+  <option>Travel</option>
   <option>Programming</option>
-  <option>Cloud</option>
-  <option>Design</option>
-  <option>Marketing</option>
+  <option>Business</option>
+  <option>News</option>
+  <option>WellNess</option>
  
 </select>
  </div>
