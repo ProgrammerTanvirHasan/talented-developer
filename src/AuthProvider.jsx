@@ -62,7 +62,8 @@ const AllInfo={
   user,setUser,
   googleSign,
   githubSign,
-  logOut
+  logOut,
+  loading
 };
     return (
         <AuthContext.Provider value={AllInfo}>

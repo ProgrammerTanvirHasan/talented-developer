@@ -1,9 +1,9 @@
 
 
 const Wish = ({card,handleRemove}) => {
-    const {title,image,category,email,bio,_id}=card;
+    const {title,image,category,bio,_id}=card;
 
-
+         
     return (
         <div>
             <div className="card card-compact  w-96 h-96 shadow-xl mx-auto bg-blue-950">

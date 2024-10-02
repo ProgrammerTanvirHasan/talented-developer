@@ -33,10 +33,10 @@ useEffect(()=>{
 
          <div className="w-10/12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 ">
            
-            <h2 className="text-white font-bold text-xl text-center mt-8">Recent Blog Here</h2>
+            <h2></h2>
             
               {
-                 data.map((blog)=> <Blogs blog={blog} key={blog._id}></Blogs>)
+                 data.slice(0,6).map((blog)=> <Blogs blog={blog} key={blog._id}></Blogs>)
                                        
                                                         
               }

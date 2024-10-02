@@ -60,7 +60,7 @@ const NavBar = () => {
     <div className="bg-gradient-to-r from-slate-800 to-slate-600 text-white font-bold">
       <div className="navbar">
         <div className="navbar-start">
-          <div className="dropdown">
+          <div className="dropdown  z-10">
             <div tabIndex={0} role="button" className="btn btn-ghost">
               <button className="text-2xl">
                 <NavLink

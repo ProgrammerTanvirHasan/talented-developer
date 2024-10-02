@@ -8,6 +8,7 @@ import FeaturedBlog from "../featured/FeaturedBlog";
 import WishList from "../wishlist/WishList";
 import Login from "../Login";
 import Register from "../Register";
+import PrivateRoute from "../PrivateRoute";
 
 
 
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         },
         {
           path:"/addBlog",
-          element:<AddBlog></AddBlog>
+          element:<PrivateRoute><AddBlog></AddBlog></PrivateRoute>
         },
         {
           path:"/allBlog",
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
         },
         {
           path:"/wish",
-          element:<WishList></WishList>
+          element:<PrivateRoute><WishList></WishList></PrivateRoute>
         },
        {
          path:"/login",

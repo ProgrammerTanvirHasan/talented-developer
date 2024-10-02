@@ -4,9 +4,13 @@ import Marquee from "react-fast-marquee";
 import Wish from "./Wish";
 
 
+
 const WishList = () => {
  const [wish,setWish]=useState([])
  
+
+
+
  
     useEffect(()=>{
         fetch('http://localhost:5000/wishlist')

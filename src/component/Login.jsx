@@ -1,7 +1,7 @@
 
 
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import {  GoogleAuthProvider } from "firebase/auth";
 import { GithubAuthProvider } from "firebase/auth";
@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 
 const Login = () => {
   const {signUser,googleSign,setUser,githubSign}=useContext(AuthContext)
+  const location=useLocation()
+  const Navigate=useNavigate()
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
   
@@ -36,12 +38,13 @@ signUser(email,password)
 
  setUser(user)
   form.reset()
- 
+  Navigate(location?.state? location.state:'/')
   
 })  
 .catch(error=>{
   console.log(error.message);
 })
+
 
 }
 
@@ -50,6 +53,7 @@ const handleGoogle=()=>{
   .then(result=>{
     const googleUser=result.user;
     setUser(googleUser)
+    Navigate(location?.state? location.state:'/')
    
   })
   .catch(error=>{
@@ -62,6 +66,7 @@ const handleGithub=()=>{
   .then(result=>{
     const gitUser=result.user;
     setUser(gitUser)
+    Navigate(location?.state? location.state:'/')
     
   })
   .catch(error=>{

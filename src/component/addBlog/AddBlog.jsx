@@ -80,7 +80,7 @@ const handleBlog=(e)=>{
             <div className="form-control">
         
                 <label className="form-control ">
-      <input type="email"  name="email" className="text-orange-500 bg-slate-600 px-2 text-center"  defaultValue={user?.email || 'No email found'} />
+      <input type="email"  name="email" className="text-orange-500 bg-slate-600 px-2 text-center"  defaultValue={user?.email || 'developer@gmail.com'} />
         </label>
      
    
