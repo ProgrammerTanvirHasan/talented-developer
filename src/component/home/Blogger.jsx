@@ -3,8 +3,8 @@ const Blogger = () => {
     return (
         <div className="card ">
             <div className="text-center">
-            <p className="lg:text-5xl font-semibold mb-2">About Blogger Team</p>
-            <p>Who are in extremely love with eco friendly system.</p>
+            <p className="lg:text-5xl font-semibold mb-2 ">About Blogger Team</p>
+            <p >Who are in extremely love with eco friendly system.</p>
             </div>
           <div className="mt-4 lg:mt-12">
           <div className="lg:flex ">
