@@ -24,16 +24,16 @@ useEffect(()=>{
 
 },[])
 
-
+//w-10/12  grid grid-cols-1 lg:grid-cols-2 gap-4 mx-auto
 
    
     return ( 
-       <div className="bg-gradient-to-b from-slate-800 to-slate-600 pt-8 pb-8 ">
+       <div className="bg-gradient-to-b from-slate-800 to-slate-600 pt-8 pb-8 px-2 ">
        
 
-         <div className="w-10/12 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 ">
+         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:ml-10 mt-4">
            
-            <h2></h2>
+          
             
               {
                  data.slice(0,6).map((blog)=> <Blogs blog={blog} key={blog._id}></Blogs>)

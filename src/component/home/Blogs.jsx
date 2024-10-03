@@ -55,13 +55,17 @@ const Blogs = ({blog}) => {
  
     return (
         <div>
-            <div className="card bg-gradient-to-b from-zinc-600 to-slate-500 w-96  border">
-  <figure>
-    <img
+            <div className="card bg-gradient-to-b from-zinc-600 to-slate-500 w-full lg:w-[348px] h-[526px] border">
+   
+    <figure>
+    <img 
+    
       src={image}
       alt="Image"/>
   </figure>
-  <div className="card-body">
+   
+  <div className="card-body 
+  ">
     <h2 className="card-title text-orange-300">{title}</h2>
     <p className="text-white font-semibold text-lg
     ">Category:{category}</p>

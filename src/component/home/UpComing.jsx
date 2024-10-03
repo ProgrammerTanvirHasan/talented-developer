@@ -12,7 +12,7 @@ const UpComing = () => {
 
       
 
-            <div className="card bg-base-100 image-full w-96 shadow-xl">
+            <div className="card bg-base-100 image-full w-96 h-60 shadow-xl">
                    <figure>
                     <img
                    src="https://i.ibb.co.com/kxLhhJ7/successful-formalwear-businessman-climb-upstairs-climb-ladder-startup-lightbulb-blue-background-9685.jpg"
@@ -27,7 +27,7 @@ const UpComing = () => {
                  </div>
             </div>
 
-            <div className="card bg-base-100 image-full w-96 shadow-xl">
+            <div className="card bg-base-100 image-full w-96 h-60 shadow-xl">
                    <figure>
                     <img
                    src="https://i.ibb.co.com/dthqtbb/student-online-cute-young-guy-studying-computer-glasses-green-shirt-with-cup-happy-140725-164742.jpg"
@@ -44,7 +44,7 @@ const UpComing = () => {
 
 
 
-            <div className="card bg-base-100 image-full w-96 shadow-xl">
+            <div className="card bg-base-100 image-full w-96 h-60 shadow-xl">
                    <figure>
                     <img
                    src="https://i.ibb.co.com/8DkVBQV/standard-quality-control-collage-23-2149631024.jpg"
@@ -61,7 +61,7 @@ const UpComing = () => {
 
 
 
-            <div className="card bg-base-100 image-full w-96 shadow-xl">
+            <div className="card bg-base-100 image-full w-96 h-60 shadow-xl">
                    <figure>
                     <img
                    src="https://i.ibb.co.com/Fz5m3Bt/people-holding-media-player-icons-clapper-icon-53876-65386.jpg"

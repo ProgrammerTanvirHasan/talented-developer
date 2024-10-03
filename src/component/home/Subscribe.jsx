@@ -52,7 +52,7 @@ const Subscribe = () => {
         <div>
              <div>
             <div className="hero bg-slate-500">
-  <div className="hero-content flex-col lg:flex-row-reverse">
+  <div className="hero-content flex-col lg:flex-row ">
     <div className="text-center lg:text-left">
       
     </div>
@@ -90,8 +90,14 @@ const Subscribe = () => {
         </div>
       </form>
       <p className="text-center font-bold">Join our community now!</p>
+      
     </div>
+   <div className="glass p-2">
+   <p className="text-7xl ">Thanks for </p>
+   <p className="font-bold text-center glass ">Subscribing</p>
+   </div>
   </div>
+  
 </div>
             </div>
         </div>
