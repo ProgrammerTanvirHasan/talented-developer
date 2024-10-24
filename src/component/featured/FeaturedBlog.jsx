@@ -23,7 +23,7 @@ const [data,setData]=useState([]);
     return (
         <div className="glass pb-4">
            <h1 className="text-3xl text-center py-4 glass">Top 10 Post Here</h1>
-
+               
            <div>
             <div className="grid lg:grid-cols-4 lg:gap-4 text-orange-300 lg:text-2xl mb-2 ">
                 <th>SL</th>
