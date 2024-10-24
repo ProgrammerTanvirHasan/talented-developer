@@ -4,7 +4,7 @@ import { AuthContext } from "../AuthProvider";
 import Swal from 'sweetalert2';
 import { getAuth, updateProfile } from "firebase/auth";
 import app from "../firebase.confiq";
-
+const auth = getAuth(app);
 const Register = () => {
   const [passError, setPassError] = useState('');
  
@@ -13,7 +13,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
-    const auth = getAuth(app);
+    
     e.preventDefault();
     const form = e.target;
     const name=form.name.value;
@@ -72,8 +72,8 @@ const Register = () => {
 
   return (
     <div>
-      <img src="https://i.ibb.co/n112nbk/istockphoto-1317983119-612x612.jpg" alt="" />
-      <div className="hero">
+     
+      <div className="hero ">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <p className="py-6">
@@ -87,26 +87,26 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input type="text" placeholder="name" name="name" className="input input-bordered"  />
+                <input type="text" placeholder="name" name="name" className="input input-bordered text-black"  />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
-                <input type="text" placeholder="image" name="photoURL" className="input input-bordered"  />
+                <input type="text" placeholder="image" name="photoURL" className="input input-bordered text-black"  />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input type="email" placeholder="email" name="email" className="input input-bordered" required />
+                <input type="email" placeholder="email" name="email" className="input input-bordered text-black" required />
               </div>
 
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" placeholder="password" name="password" className="input input-bordered" required />
+                <input type="password" placeholder="password" name="password" className="input input-bordered text-black" required />
               </div>
               <div className="form-control mt-6">
                 <button className="btn bg-gradient-to-r from-slate-400 text-lg to-slate-950 text-orange-300">Register</button>

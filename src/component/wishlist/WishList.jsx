@@ -1,22 +1,30 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import Wish from "./Wish";
+import { AuthContext } from "../../AuthProvider";
+
 
 
 
 const WishList = () => {
- const [wish,setWish]=useState([])
+  const {user} = useContext(AuthContext);
+
  
 
+  const email = user?.email;
+ 
+ const [wish,setWish]=useState([]);
+ 
 
 
  
     useEffect(()=>{
-        fetch('http://localhost:5000/wishlist')
+        fetch(`http://localhost:5000/wishlist/${email}`)
         .then(res=>res.json())
         .then(data=>setWish(data))
     },[])
+    
 
     const handleRemove=(_id)=>{
     
@@ -51,3 +59,16 @@ const WishList = () => {
 };
 
 export default WishList;
+
+
+
+
+
+
+
+
+
+
+
+
+

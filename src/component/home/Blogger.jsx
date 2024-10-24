@@ -8,7 +8,7 @@ const Blogger = () => {
             </div>
           <div className="mt-4 lg:mt-12">
           <div className="lg:flex ">
-                  <div className="lg:w-1/2 card-body text-blue-700">
+                  <div className="lg:w-1/2 card-body text-green-800">
                       <p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that.
 
 inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women.</p>

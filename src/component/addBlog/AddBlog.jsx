@@ -18,11 +18,12 @@ const handleBlog=(e)=>{
   const title=form.title.value;
   const image=form.image.value;
   const bio=form.bio.value;
+  const description=form.description.value;
   const category=form.category.value;
   const email=form.email.value;
   const time=form.time.value;
-  const blog={title,image,bio,category,email,time}
-  console.log(blog);
+  const blog={title,image,bio,category,email,time,description}
+  
   
  
 
@@ -109,7 +110,15 @@ const handleBlog=(e)=>{
      </div> 
         <textarea className="textarea textarea-primary" placeholder="Type here" name="bio"></textarea>
     
+        </div>
 
+        <div className="flex">
+
+        <div className="label">
+    <span className="label-text text-xl font-semibold text-orange-200 ">Long-Description</span>
+     </div> 
+        <textarea className="textarea textarea-primary" placeholder="description" name="description"></textarea>
+    
         </div>
 
         <div className="flex">
@@ -124,6 +133,9 @@ const handleBlog=(e)=>{
   <option>Business</option>
   <option>News</option>
   <option>WellNess</option>
+   <option>Education</option>
+  <option>Psychology</option>
+  <option>Gaming</option>
  
 </select>
  </div>
