@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import Table from "./Table";
 
@@ -5,42 +6,35 @@ import Table from "./Table";
 
 
 const FeaturedBlog = () => {
+const [data,setData]=useState([]);
 
-  const [item,setItem]=useState([]);
-
-
-  useEffect(()=>{
-         fetch('http://localhost:5000/developers')
-         .then(res=>res.json())
-         .then(data=>setItem(data))
-  },[])
-
-
-
+    useEffect(() => {
+        axios.get('http://localhost:5000/top-posts')
+          .then((res) => {
+            setData(res.data);
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      }, []);
 
 
 
     return (
-        <div >
-        <h2>Top 10 Blogs Here:</h2>
-      
-        <div className="grid grid-cols-4 ">
+        <div className="glass pb-4">
+           <h1 className="text-3xl text-center py-4 glass">Top 10 Post Here</h1>
 
-        <th>sl</th>
-        <th>Title</th>  
-        <th>Owner</th>
-        <th>Photo</th>
-            <div>
-            {
-                item.map((blog,index)=> <Table key={blog._id} blog={blog} index={index}></Table>)
-            }
-
+           <div>
+            <div className="grid lg:grid-cols-4 lg:gap-4 text-orange-300 lg:text-2xl mb-2 ">
+                <th>SL</th>
+                <th>B.Title</th>
+                <th>B.Owner</th>
+                <th>Photo</th>
             </div>
-        </div>
-       
-        
-  
-
+            {
+                data.map((feature,index)=> <Table key={feature._id} index={index} feature={feature}></Table>  )
+            }
+           </div>
         </div>
     );
 };
