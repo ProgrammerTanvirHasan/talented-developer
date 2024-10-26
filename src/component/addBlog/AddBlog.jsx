@@ -56,7 +56,7 @@ const AddBlog = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left"></div>
           <div className=" bg-slate-500 w-full max-w-sm  border shadow-2xl">
-            <form onSubmit={handleBlog} className="card-body">
+          <form onSubmit={handleBlog} className="card-body">
              
             <div>
             
