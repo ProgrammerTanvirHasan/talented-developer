@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider";
+import { Link } from "react-router-dom";
 
-const AllCard = ({blog}) => {
-    const { title, image, category } = blog; 
+const AllCard = ({ blog }) => {
+  const { title, image, category ,_id} = blog;
 
-
-    const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   const { user } = useContext(AuthContext);
 
@@ -18,7 +18,6 @@ const AllCard = ({blog}) => {
   }, []);
 
   const handleWishlist = (blog) => {
-   
     const includeWishlist = wishlist.some(
       (item) => item.title === blog.title && item.email === user.email
     );
@@ -33,10 +32,9 @@ const AllCard = ({blog}) => {
       return;
     }
 
- 
     const wishlistItem = {
       ...blog,
-      email: user.email, 
+      email: user.email,
     };
 
     fetch("http://localhost:5000/wishlist", {
@@ -44,11 +42,10 @@ const AllCard = ({blog}) => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(wishlistItem), 
+      body: JSON.stringify(wishlistItem),
     })
       .then((res) => {
         if (!res.ok) {
-         
           return res.json().then((err) => {
             throw err;
           });
@@ -65,7 +62,6 @@ const AllCard = ({blog}) => {
         setWishlist([...wishlist, data]);
       })
       .catch((error) => {
-        
         console.error("Error:", error.message);
         Swal.fire({
           title: "Error",
@@ -76,38 +72,37 @@ const AllCard = ({blog}) => {
       });
   };
 
+  return (
+    <div>
+      <div>
+        <div className="card  border-b w-full lg:w-[348px]">
+          <figure>
+            <img className="h-96 w-96" src={image} alt="Image" />
+          </figure>
+          <div className="card-body">
+            <h2 className="card-title text-orange-300">{title}</h2>
+            <p className="text-white font-semibold text-lg">
+              Category: {category}
+            </p>
 
-
-    return (
-        <div>
-              <div>
-      <div className="card  border-b w-full lg:w-[348px]">
-        <figure>
-          <img className="h-96 w-96" src={image} alt="Image" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title text-orange-300">{title}</h2>
-          <p className="text-white font-semibold text-lg">
-            Category: {category}
-          </p>
-       
-         
-          <div className="text-center">
-            <button className="btn glass bg-slate-950 text-black">
-              Details
-            </button>
-            <button
-              onClick={() => handleWishlist(blog)}
-              className="btn glass bg-slate-700 text-black"
-            >
-              WishList
-            </button>
+            <div className="text-center">
+              <Link to={`/details/${_id}`}>
+                <button className="btn glass bg-slate-950 text-black">
+                  Details
+                </button>
+              </Link>
+              <button
+                onClick={() => handleWishlist(blog)}
+                className="btn glass bg-slate-700 text-black"
+              >
+                WishList
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-        </div>
-    );
+  );
 };
 
 export default AllCard;

@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider";
-import { div } from "framer-motion/client";
+import { Link } from "react-router-dom";
 
 const Blogs = ({ blog }) => {
-  const { title, image, category, email } = blog;
+  const { title, image, category, email, _id } = blog;
   const [wishlist, setWishlist] = useState([]);
-
+ 
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
@@ -71,35 +71,37 @@ const Blogs = ({ blog }) => {
       });
   };
 
-
   return (
-   <div >
-     <div >
-      <div className=" card border-b w-full lg:w-[348px] ">
-        <figure>
-          <img className="h-96" src={image} alt="Image" />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title text-orange-300">{title}</h2>
-          <p className="text-white font-semibold text-lg">
-            Category: {category}
-          </p>
-          <p className="text-white">{email}</p>{" "}
-          <div className="text-center">
-            <button className="btn glass bg-slate-950 text-black">
-              Details
-            </button>
-            <button
-              onClick={() => handleWishlist(blog)}
-              className="btn glass bg-slate-700 text-black"
-            >
-              WishList
-            </button>
+    <div>
+      <div>
+        <div className=" card border-b w-full lg:w-[348px] ">
+          <figure>
+            <img className="h-96" src={image} alt="Image" />
+          </figure>
+          <div className="card-body">
+            <h2 className="card-title text-orange-300">{title}</h2>
+            <p className="text-white font-semibold text-lg">
+              Category: {category}
+            </p>
+            <p className="text-white">{email}</p>{" "}
+            <div className="text-center">
+              <Link to={`/details/${_id}`}>
+                <button className="btn glass bg-slate-950 text-black">
+                  Details
+                </button>
+              </Link>
+
+              <button
+                onClick={() => handleWishlist(blog)}
+                className="btn glass bg-slate-700 text-black"
+              >
+                WishList
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-   </div>
   );
 };
 
