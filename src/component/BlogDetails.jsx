@@ -8,6 +8,19 @@ const BlogDetails = () => {
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
 
+  useEffect(() => {
+    fetch(`http://localhost:5000/comment/${details._id}`)
+      .then((res) => res.json())
+      .then((data) => setComments(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  const existComment = (blog) => {
+    return comments.some(
+      (item) => item._id === blog._id && item.email === user.email
+    );
+  };
+
   const handleComment = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -15,11 +28,22 @@ const BlogDetails = () => {
 
     const blog = {
       comment,
-      email: user?.email || user?.displayName,
+      _id: details._id,
+      email: user?.email || user.displayName,
       photoURL:
         user?.photoURL ||
         "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
     };
+
+    if (existComment(blog)) {
+      Swal.fire({
+        title: "Already added",
+        text: "This blog is already in your Comment box!",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
 
     fetch("http://localhost:5000/comment", {
       method: "POST",
@@ -36,36 +60,32 @@ const BlogDetails = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
+        setComments([...comments, blog]);
       });
 
     form.reset();
   };
 
-  useEffect(() => {
-    fetch("http://localhost:5000/comment")
-      .then((res) => res.json())
-      .then((data) => setComments(data))
-      .catch((err) => console.error(err));
-  }, [comments]);
-
   return (
     <div>
       <div className="text-center">
-        <div className=" card glass ">
+        <div className="card glass ">
           <h2 className="card-title text-orange-400 p-4">{details.title}</h2>
           <figure>
-            <img src={details.image} />
+            <img src={details.image} alt={details.title} />
           </figure>
           <h2 className="text-3xl border-b-4 w-36">About</h2>
           <div className="card-body">
             <p>{details.bio}</p>
             <p>{details.description}</p>
 
-            <div className="flex flex-row-reverse justify-between">
-              {user.email === details.email && (
+            <div className="lg:flex flex-row-reverse justify-between">
+              {user && user.email === details.email && (
                 <div className="card-actions justify-end">
                   <Link to={`/update/${details._id}`}>
-                    <button className="p-4 rounded-md px-8 bg-orange-900">Update</button>
+                    <button className="p-4 rounded-md bg-orange-900">
+                      Update Your Blog
+                    </button>
                   </Link>
                 </div>
               )}
@@ -89,7 +109,7 @@ const BlogDetails = () => {
             </div>
           </div>
           <div>
-            <h2 className="border-y-2 w-60 border-x-2 text-xl ">
+            <h2 className="border-y-2 w-60 border-x-2 text-xl">
               Your Comments
             </h2>
             <div className="py-2 grid lg:grid-cols-3 gap-4">
@@ -98,8 +118,8 @@ const BlogDetails = () => {
                   key={comment._id}
                   className="pr-2 rounded-xl bg-gradient-to-r from-slate-700 to-slate-950"
                 >
-                  <div className="flex  p-2 rounded-lg">
-                    <div className="flex flex-col  mr-4">
+                  <div className="flex p-2 rounded-lg">
+                    <div className="flex flex-col mr-4">
                       <img
                         className="rounded-xl w-20 h-24"
                         src={comment.photoURL}
@@ -107,7 +127,7 @@ const BlogDetails = () => {
                       />
                       <p className="mt-2 text-sm text-white">{comment.email}</p>
                     </div>
-                    <div className="flex ">
+                    <div className="flex">
                       <p className="text-white">{comment.comment}</p>
                     </div>
                   </div>
@@ -122,5 +142,3 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
-
-//

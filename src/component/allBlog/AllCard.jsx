@@ -4,7 +4,7 @@ import { AuthContext } from "../../AuthProvider";
 import { Link } from "react-router-dom";
 
 const AllCard = ({ blog }) => {
-  const { title, image, category ,_id} = blog;
+  const { title, image, category, _id } = blog;
 
   const [wishlist, setWishlist] = useState([]);
 
@@ -19,7 +19,7 @@ const AllCard = ({ blog }) => {
 
   const handleWishlist = (blog) => {
     const includeWishlist = wishlist.some(
-      (item) => item.title === blog.title && item.email === user.email
+      (item) => item._id === blog._id && item.email === user.email
     );
 
     if (includeWishlist) {

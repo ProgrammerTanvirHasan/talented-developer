@@ -11,6 +11,7 @@ const AllBlog = () => {
     axios
       .get("http://localhost:5000/developers")
       .then((res) => {
+        
         setData(res.data);
         setSelectedData(res.data);
       })
@@ -31,7 +32,8 @@ const AllBlog = () => {
   };
 
   const handleSearch = (e) => {
-    const search = e.target.value.toLowerCase();
+    e.preventDefault();
+    const search = e.target.search.value.toLowerCase();
     setSearchTerm(search);
 
     const filteredBlogs = data.filter((blog) =>
@@ -71,16 +73,22 @@ const AllBlog = () => {
         <br />
 
         <div>
-          <label className="input w-80 lg:w-full input-bordered flex items-center gap-2 bg-slate-800 text-white">
+          <form
+            onSubmit={handleSearch}
+            className="input w-80 lg:w-full input-bordered flex items-center gap-2 bg-slate-800 text-white"
+          >
             <input
-              onClick={handleSearch}
               type="text"
               className="grow "
               placeholder="Search"
+              name="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-
-            <MdSearch></MdSearch>
-          </label>
+            <button type="submit" className="flex items-center justify-center">
+              <MdSearch />
+            </button>
+          </form>
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:ml-10 mt-8">

@@ -6,14 +6,12 @@ const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
- 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
   };
 
- 
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
@@ -112,7 +110,6 @@ const NavBar = () => {
         </div>
 
         <div className="navbar-end flex gap-4">
-         
           <button
             onClick={toggleTheme}
             className="btn bg-blue-500 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-800"
