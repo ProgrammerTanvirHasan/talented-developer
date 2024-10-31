@@ -1,5 +1,5 @@
 const Table = ({ feature, index }) => {
-  const { title, email ,image,name,photoURL} = feature;
+  const { title, email, image, name, photoURL } = feature;
   return (
     <div>
       {
@@ -8,8 +8,8 @@ const Table = ({ feature, index }) => {
           <td className="text-center">{title}</td>
           <td className="text-center">{name || email}</td>
           <td className="flex justify-center">
-          <img className="w-36 h-24" src={ photoURL || image} alt="" />
-        </td>
+            <img className="w-36 h-24" src={photoURL || image} alt="" />
+          </td>
         </div>
       }
     </div>

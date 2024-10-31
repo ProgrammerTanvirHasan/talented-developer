@@ -5,13 +5,13 @@ import { MdSearch } from "react-icons/md";
 
 const AllBlog = () => {
   const [data, setData] = useState([]);
-  const [selectedData, setSelectedData] = useState(data);
+  const [selectedData, setSelectedData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/developers")
       .then((res) => {
-        
         setData(res.data);
         setSelectedData(res.data);
       })
@@ -22,7 +22,6 @@ const AllBlog = () => {
 
   const handleCategory = (e) => {
     const category = e.target.value;
-
     if (category === "All") {
       setSelectedData(data);
     } else {
@@ -33,9 +32,7 @@ const AllBlog = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const search = e.target.search.value.toLowerCase();
-    setSearchTerm(search);
-
+    const search = searchTerm.toLowerCase();
     const filteredBlogs = data.filter((blog) =>
       blog.title.toLowerCase().includes(search)
     );
@@ -49,28 +46,26 @@ const AllBlog = () => {
         <div>
           <select
             onChange={handleCategory}
+            defaultValue="Select Category"
             className="select w-80 lg:w-full max-w-xs bg-slate-800 text-white"
           >
-            <option disabled selected>
-              pick your selected category
-            </option>
-
+            <option disabled>Select Category</option>
             <option value="All">All</option>
             <option value="Travel">Travel</option>
             <option value="Programming">Programming</option>
             <option value="Business">Business</option>
             <option value="News">News</option>
-            <option value="WellNess">Wellness</option>
+            <option value="Wellness">Wellness</option>
             <option value="Education">Education</option>
             <option value="Psychology">Psychology</option>
             <option value="Gaming">Gaming</option>
           </select>
-          {selectedData.map((select) => (
-            <li key={select._id}> {select.title} </li>
-          ))}
+          <ul>
+            {selectedData.map((select) => (
+              <li key={select._id}>{select.title}</li>
+            ))}
+          </ul>
         </div>
-
-        <br />
 
         <div>
           <form
@@ -79,7 +74,7 @@ const AllBlog = () => {
           >
             <input
               type="text"
-              className="grow "
+              className="grow"
               placeholder="Search"
               name="search"
               value={searchTerm}
@@ -91,11 +86,10 @@ const AllBlog = () => {
           </form>
         </div>
       </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:ml-10 mt-8">
         {selectedData.length > 0 ? (
-          selectedData.map((blog) => (
-            <AllCard blog={blog} key={blog._id}></AllCard>
-          ))
+          selectedData.map((blog) => <AllCard blog={blog} key={blog._id} />)
         ) : (
           <p className="text-red-300 text-2xl">No blogs found</p>
         )}
