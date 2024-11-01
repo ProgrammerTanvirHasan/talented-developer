@@ -20,7 +20,7 @@ const WishList = () => {
 
  
     useEffect(()=>{
-        fetch(`http://localhost:5000/wishlist/${email}`)
+        fetch(`http://localhost:5000/wishlist/${email}`,{credentials:'include'}  )
         .then(res=>res.json())
         .then(data=>setWish(data))
     },[])

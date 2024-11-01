@@ -9,6 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -45,8 +46,28 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const loggedUser = currentUser?.email || user?.email;
+      const loggedInUser = { email: loggedUser };
       setUser(currentUser);
       setLoading(false);
+
+      if (currentUser) {
+        axios
+          .post("http://localhost:5000/jwt", loggedInUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      } else {
+        axios
+          .post("http://localhost:5000/logout", loggedInUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
     });
     return () => {
       return unSubscribe();

@@ -21,7 +21,7 @@ const Login = () => {
 
     signUser(email, password)
       .then((result) => {
-        const user = result.user;
+        const loggedInUser = result.user;
 
         Swal.fire({
           title: "Success",
@@ -30,7 +30,8 @@ const Login = () => {
           confirmButtonText: "Cool",
         });
 
-        setUser(user);
+        setUser(loggedInUser);
+
         form.reset();
         Navigate(location?.state ? location.state : "/");
       })
