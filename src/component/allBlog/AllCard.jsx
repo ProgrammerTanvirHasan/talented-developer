@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const AllCard = ({ blog }) => {
   const { title, image, category, _id } = blog;
+  
 
   const [wishlist, setWishlist] = useState([]);
 

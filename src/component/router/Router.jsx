@@ -61,8 +61,7 @@ const router = createBrowserRouter([
             <BlogDetails></BlogDetails>
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/developers/${params._id}`),
+        loader: ({params}) => fetch(`http://localhost:5000/developers/${params._id}`),
       },
       {
         path: "/update/:_id",

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 const BlogDetails = () => {
   const details = useLoaderData();
+ 
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
 
@@ -80,7 +81,8 @@ const BlogDetails = () => {
             <p>{details.description}</p>
 
             <div className="lg:flex flex-row-reverse justify-between">
-              {user && user.email === details.email && (
+              {user && user.email === details.email ? (
+              
                 <div className="card-actions justify-end">
                   <Link to={`/update/${details._id}`}>
                     <button className="p-4 rounded-md bg-orange-900">
@@ -88,24 +90,25 @@ const BlogDetails = () => {
                     </button>
                   </Link>
                 </div>
-              )}
-
-              <div>
-                <form onSubmit={handleComment}>
-                  <div className="form-control w-72 mt-4">
-                    <textarea
-                      name="comment"
-                      className="textarea textarea-success bg-black text-white h-24"
-                      placeholder="Write a comment.."
-                    ></textarea>
-                    <div className="label">
-                      <button className="bg-green-700 p-2 border rounded-xl">
-                        Comment
-                      </button>
+              ) : (
+               
+                <div>
+                  <form onSubmit={handleComment}>
+                    <div className="form-control w-72 mt-4">
+                      <textarea
+                        name="comment"
+                        className="textarea textarea-success bg-black text-white h-24"
+                        placeholder="Write a comment.."
+                      ></textarea>
+                      <div className="label">
+                        <button className="bg-green-700 p-2 border rounded-xl">
+                          Comment
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </form>
-              </div>
+                  </form>
+                </div>
+              )}
             </div>
           </div>
           <div>
