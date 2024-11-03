@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
+import { v4 as uuidv4 } from "uuid";
+
 import Swal from "sweetalert2";
 
 const BlogDetails = () => {
   const details = useLoaderData();
- 
+
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
 
@@ -14,11 +16,12 @@ const BlogDetails = () => {
       .then((res) => res.json())
       .then((data) => setComments(data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [details._id]);
 
-  const existComment = (blog) => {
+  const existComment = (newComment) => {
     return comments.some(
-      (item) => item._id === blog._id && item.email === user.email
+      (item) =>
+        item.email === newComment.email && item.title === newComment.title
     );
   };
 
@@ -28,8 +31,10 @@ const BlogDetails = () => {
     const comment = form.comment.value;
 
     const blog = {
+      _id: uuidv4(),
       comment,
-      _id: details._id,
+      title: details.title,
+      blogId: details._id,
       email: user?.email || user.displayName,
       photoURL:
         user?.photoURL ||
@@ -82,7 +87,6 @@ const BlogDetails = () => {
 
             <div className="lg:flex flex-row-reverse justify-between">
               {user && user.email === details.email ? (
-              
                 <div className="card-actions justify-end">
                   <Link to={`/update/${details._id}`}>
                     <button className="p-4 rounded-md bg-orange-900">
@@ -91,7 +95,6 @@ const BlogDetails = () => {
                   </Link>
                 </div>
               ) : (
-               
                 <div>
                   <form onSubmit={handleComment}>
                     <div className="form-control w-72 mt-4">
@@ -111,6 +114,7 @@ const BlogDetails = () => {
               )}
             </div>
           </div>
+
           <div>
             <h2 className="border-y-2 w-60 border-x-2 text-xl">
               Your Comments
@@ -122,18 +126,18 @@ const BlogDetails = () => {
                   className="pr-2 rounded-xl bg-gradient-to-r from-slate-700 to-slate-950"
                 >
                   <div className="flex p-2 rounded-lg">
-                    <div className="flex flex-col mr-4">
+                    <div className="flex">
                       <img
                         className="rounded-xl w-20 h-24"
                         src={comment.photoURL}
                         alt=""
                       />
-                      <p className="mt-2 text-sm text-white">{comment.email}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="text-white">{comment.comment}</p>
+                      <p className="text-white ml-2 break-words">
+                        {comment.comment}
+                      </p>
                     </div>
                   </div>
+                  <p className="mt-2 text-sm text-white">{comment.email}</p>
                 </div>
               ))}
             </div>
