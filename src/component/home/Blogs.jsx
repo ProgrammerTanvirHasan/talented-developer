@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const Blogs = ({ blog }) => {
   const { title, image, category, email, _id } = blog;
   const [wishlist, setWishlist] = useState([]);
- 
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/wishlist")
+    fetch(`http://localhost:5000/wishlist`)
       .then((res) => res.json())
       .then((data) => setWishlist(data))
       .catch((err) => console.error(err));
@@ -18,7 +18,7 @@ const Blogs = ({ blog }) => {
 
   const handleWishlist = (blog) => {
     const includeWishlist = wishlist.some(
-      (item) => item.title === blog.title && item.email === user.email
+      (item) => item.blogId === blog._id && item.email === user.email
     );
 
     if (includeWishlist) {
@@ -32,7 +32,11 @@ const Blogs = ({ blog }) => {
     }
 
     const wishlistItem = {
-      ...blog,
+      _id: uuidv4(),
+      blogId: _id,
+      title: title,
+      image: image,
+      category: category,
       email: user.email,
     };
 
@@ -58,6 +62,7 @@ const Blogs = ({ blog }) => {
           icon: "success",
           confirmButtonText: "OK",
         });
+
         setWishlist([...wishlist, data]);
       })
       .catch((error) => {
@@ -74,7 +79,7 @@ const Blogs = ({ blog }) => {
   return (
     <div>
       <div>
-        <div className=" card border-b w-full lg:w-[348px] ">
+        <div className="card border-b w-full lg:w-[348px]">
           <figure>
             <img className="h-96" src={image} alt="Image" />
           </figure>
@@ -83,14 +88,13 @@ const Blogs = ({ blog }) => {
             <p className="text-white font-semibold text-lg">
               Category: {category}
             </p>
-            <p className="text-white">{email}</p>{" "}
+            <p className="text-white">{email}</p>
             <div className="text-center">
               <Link to={`/details/${_id}`}>
                 <button className="btn glass bg-slate-950 text-black">
                   Details
                 </button>
               </Link>
-
               <button
                 onClick={() => handleWishlist(blog)}
                 className="btn glass bg-slate-700 text-black"

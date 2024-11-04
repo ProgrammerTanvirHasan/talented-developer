@@ -2,17 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../AuthProvider";
 import { Link } from "react-router-dom";
-
+import { v4 as uuidv4 } from "uuid";
 const AllCard = ({ blog }) => {
   const { title, image, category, _id } = blog;
-  
 
   const [wishlist, setWishlist] = useState([]);
 
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/wishlist")
+    fetch(`http://localhost:5000/wishlist`)
       .then((res) => res.json())
       .then((data) => setWishlist(data))
       .catch((err) => console.error(err));
@@ -20,7 +19,7 @@ const AllCard = ({ blog }) => {
 
   const handleWishlist = (blog) => {
     const includeWishlist = wishlist.some(
-      (item) => item._id === blog._id && item.email === user.email
+      (item) => item.blogId === blog._id && item.email === user.email
     );
 
     if (includeWishlist) {
@@ -34,7 +33,11 @@ const AllCard = ({ blog }) => {
     }
 
     const wishlistItem = {
-      ...blog,
+      _id: uuidv4(),
+      blogId: _id,
+      title: title,
+      image: image,
+      category: category,
       email: user.email,
     };
 
