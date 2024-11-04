@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const BlogDetails = () => {
   const details = useLoaderData();
-
+  
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState([]);
 

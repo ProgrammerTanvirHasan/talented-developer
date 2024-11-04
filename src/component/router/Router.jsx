@@ -55,19 +55,20 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
       {
-        path: "/details/:_id",
+        path: "/details/:id",
         element: (
           <PrivateRoute>
             <BlogDetails></BlogDetails>
           </PrivateRoute>
         ),
-        loader: ({params}) => fetch(`http://localhost:5000/developers/${params._id}`),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/developers/${params.id}`),
       },
       {
-        path: "/update/:_id",
+        path: "/update/:id",
         element: <Update></Update>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/developers/${params._id}`),
+          fetch(`http://localhost:5000/developers/${params.id}`),
       },
     ],
   },

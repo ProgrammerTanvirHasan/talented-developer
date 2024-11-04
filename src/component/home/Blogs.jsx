@@ -9,16 +9,9 @@ const Blogs = ({ blog }) => {
   const [wishlist, setWishlist] = useState([]);
   const { user } = useContext(AuthContext);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/wishlist`)
-      .then((res) => res.json())
-      .then((data) => setWishlist(data))
-      .catch((err) => console.error(err));
-  }, []);
-
   const handleWishlist = (blog) => {
     const includeWishlist = wishlist.some(
-      (item) => item.blogId === blog._id && item.email === user.email
+      (item) => item.title === blog.title && item.email === user.email
     );
 
     if (includeWishlist) {

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
   const { signUser, googleSign, setUser, githubSign } = useContext(AuthContext);
+  const [error, setError] = useState("");
   const location = useLocation();
   const Navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
@@ -36,7 +37,7 @@ const Login = () => {
         Navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        console.log(error.message);
+        setError("Password MustBe Wrong !");
       });
   };
 
@@ -49,6 +50,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error.message);
+        setError(error.message);
       });
   };
 
@@ -60,12 +62,15 @@ const Login = () => {
         Navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        console.log(error.message);
+        setError(error.message);
       });
   };
 
   return (
     <div>
+      {error && (
+        <div className="text-red-500 text-center py-2 text-xl">{error}</div>
+      )}
       <div>
         <img
           className="flex absolute min-w-full min-h-screen"
@@ -127,7 +132,6 @@ const Login = () => {
                       GITHUB LOGIN
                     </button>
                   </div>
-                  <button className="text-orange-300">FACEBOOK LOGIN</button>
                 </form>
               </div>
             </div>
